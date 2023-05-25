@@ -16,10 +16,19 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return 'AAA';
 // });
-Route::group(['namespace'=>'App\Http\Controllers\Main'],function(){
+Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
   Route::get('/', IndexController::class);
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin'], function () {
+  Route::group(['namespace' => 'Main'], function () {
+    Route::get('/', IndexController::class);
+  });
+  Route::group(['namespace'=>'category', 'prefix'=>'categories'], function(){
+    Route::get('/',IndexController::class);
+  });
+});
+
+
 
 Auth::routes();
-
